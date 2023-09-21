@@ -1,0 +1,31 @@
+//This was used in an ecommerce implementation for a financial service. The myGroup and myTag variables will need to be changed to fit the use case.
+
+for (let index = 0; index < digitalData.productInfo.length; index++) {    
+  var myVar = digitalData.productInfo[index].productCategory.toLowerCase()
+switch(myVar) {
+  case "checking":
+    var myGroup = "prod_chk";
+    var myTag = "chksubmt"
+    break;
+  case "certificate":
+   var myGroup = "prod_cd";
+   var myTag = "cdsubmt"
+    break;
+  case "savings":
+   var myGroup = "prod_sav";
+    var myTag = "savsubmt"
+    break;
+  default:
+}
+  console.log(myGroup);       
+  gtag('event', 'conversion', {
+    'allow_custom_scripts': true,
+    'u6': digitalData.productInfo[index].productName,
+    'u7': digitalData.productInfo[index].productCode,
+    'u8': digitalData.productInfo[index].isCrossSell.toString(),
+    'u9': digitalData.productInfo[index].productCategory.toLowerCase(),
+    'u10':digitalData.productInfo[index].isCounterOffer.toString(),
+    'u11': digitalData.productInfo[index].amount,
+    send_to: 'DC-number goes here/' + myGroup + '/' + myTag + '+standard'
+  });     
+}
